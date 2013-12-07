@@ -12,12 +12,12 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :winner %><br>
-    <%= f.select :winner, User.all %>
+    <%= f.label :winner_id, "Winner" %><br>
+    <%= f.collection_select :winner_id, User.all, :id, :name %>
   </div>
   <div class="field">
-    <%= f.label :loser %><br>
-    <%= f.select :loser, User.all %>
+    <%= f.label :loser_id, "Loser" %><br>
+    <%= f.collection_select :loser_id, User.all, :id, :name %>
   </div>
   <div class="actions">
     <%= f.submit %>

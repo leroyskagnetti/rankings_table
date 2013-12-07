@@ -7,8 +7,24 @@ class User < ActiveRecord::Base
     self.mu = new_rating.mu
   end
 
+  def name
+    self.first_name.to_s + " " + self.last_name.to_s
+  end
+
   def rating
     Rating.new(self.mu, self.sigma)
+  end
+
+  def elo_low
+    (60.0 * (self.mu - 2 * self.sigma)).to_i
+  end
+
+  def elo_mid
+    (60.0 * self.mu).to_i
+  end
+
+  def elo_high
+    (60.0 * (self.mu + 2 * self.sigma)).to_i
   end
 
   def self.update_ratings(winner, loser)
