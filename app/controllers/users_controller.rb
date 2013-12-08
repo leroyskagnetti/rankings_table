@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.order(:mu)
+    @users = User.order("mu DESC")
   end
 
   # GET /users/1
