@@ -5,6 +5,8 @@
 #   gem 'sqlite3'
 development:
   adapter: postgresql
+  username: postgres
+  host: localhost
   database: pong_dev
   pool: 5
   timeout: 5000

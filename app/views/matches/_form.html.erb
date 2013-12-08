@@ -13,11 +13,11 @@
 
   <div class="field">
     <%= f.label :winner_id, "Winner" %><br>
-    <%= f.collection_select :winner_id, User.all, :id, :name %>
+    <%= f.collection_select :winner_id, User.order(:first_name), :id, :name %>
   </div>
   <div class="field">
     <%= f.label :loser_id, "Loser" %><br>
-    <%= f.collection_select :loser_id, User.all, :id, :name %>
+    <%= f.collection_select :loser_id, User.order(:first_name), :id, :name %>
   </div>
   <div class="actions">
     <%= f.submit %>
