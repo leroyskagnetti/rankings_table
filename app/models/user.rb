@@ -16,15 +16,15 @@ class User < ActiveRecord::Base
   end
 
   def elo_low
-    (60.0 * (self.mu - 2 * self.sigma)).to_i
+    (self.mu - 2 * self.sigma).to_i
   end
 
   def elo_mid
-    (60.0 * self.mu).to_i
+    self.mu.to_i
   end
 
   def elo_high
-    (60.0 * (self.mu + 2 * self.sigma)).to_i
+    (self.mu + 2 * self.sigma).to_i
   end
 
   def self.update_ratings(winner, loser)
