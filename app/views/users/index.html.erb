@@ -3,28 +3,20 @@
 <table>
   <thead>
   <tr>
-    <th>Ranking</th>
-    <th>First name</th>
-    <th>Last name</th>
-    <th>Rating</th>
-    <th>Range</th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <th>Ranking | </th>
+    <th>Team | </th>
+    <th>Rating | </th>
+    <th>Range | </th>
   </tr>
   </thead>
 
   <tbody>
   <% @users.each_with_index do |user,i| %>
     <tr>
-      <td><%= i+1 %></td>
-      <td><%= user.first_name %></td>
-      <td><%= user.last_name %></td>
-      <td><%= user.elo_mid %></td>
+      <td><%= i+1 %> | </td>
+      <td><%= link_to user.name, user %> | </td>
+      <td><%= user.elo_mid %> | </td>
       <td><%= user.elo_low %> - <%= user.elo_high %></td>
-      <td><%= link_to 'Show', user %></td>
-      <td><%= link_to 'Edit', edit_user_path(user) %></td>
-      <td><%= link_to 'Destroy', user, method: :delete, data: {confirm: 'Are you sure?'} %></td>
     </tr>
   <% end %>
   </tbody>

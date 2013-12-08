@@ -24,8 +24,7 @@ ActiveRecord::Schema.define(version: 20131208040656) do
   end
 
   create_table "users", force: true do |t|
-    t.string   "first_name"
-    t.string   "last_name"
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.float    "mu",         default: 1500.0

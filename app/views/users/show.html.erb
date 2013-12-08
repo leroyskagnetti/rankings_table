@@ -2,12 +2,12 @@
 
 <p>
   <strong>First name:</strong>
-  <%= @user.first_name %>
+  <%= @user.name %>
 </p>
 
 <p>
-  <strong>Last name:</strong>
-  <%= @user.last_name %>
+  <strong>Rating:</strong>
+  <%= @user.rating.mu %>
 </p>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |

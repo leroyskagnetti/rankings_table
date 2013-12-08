@@ -1,14 +1,9 @@
 class User < ActiveRecord::Base
-  validates :first_name, :presence => true
-  validates :last_name, :presence => true
+  validates :name, :presence => true
 
   def rating=(new_rating)
     self.sigma = new_rating.sigma
     self.mu = new_rating.mu
-  end
-
-  def name
-    self.first_name.to_s + " " + self.last_name.to_s
   end
 
   def rating
