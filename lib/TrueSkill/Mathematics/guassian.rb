@@ -34,5 +34,9 @@ class Gaussian
     tau=@tau-y.tau
     return Gaussian.new(nil,nil,pi,tau)
   end
+
+  def -(other_dist)
+    return Gaussian.new(self.mu - other_dist.mu, ((self.sigma ** 2) + (other_dist.sigma ** 2)) ** 0.5)
+  end
 end
 

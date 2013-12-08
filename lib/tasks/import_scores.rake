@@ -35,7 +35,7 @@ task :import_nba => [:environment] do |t|
   User.destroy_all
 
   skipped = false
-  CSV.foreach(Rails.root.join("lib", "assets", "nba.csv").to_s) do |row|
+  CSV.foreach(Rails.root.join("lib", "assets", "nba1213.csv").to_s) do |row|
     if !skipped
       skipped = true
     else

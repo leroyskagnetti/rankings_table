@@ -45,4 +45,9 @@ class User < ActiveRecord::Base
     winner.save!
     loser.save!
   end
+
+  def win_probability(other_user)
+    g = other_user.rating - self.rating
+    cdf(0, g.mu, g.sigma)
+  end
 end
