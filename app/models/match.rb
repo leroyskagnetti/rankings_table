@@ -13,6 +13,10 @@ class Match < ActiveRecord::Base
   end
 
   def update_user_ratings
-    User.update_ratings!(self.winner, self.loser)
+    if self.score_difference.nil?
+      User.update_ratings!(self.winner, self.loser)
+    else
+      User.update_ratings_scored!(self.winner, self.loser, self.score_difference)
+    end
   end
 end

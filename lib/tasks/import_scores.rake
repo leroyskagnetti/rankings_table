@@ -50,12 +50,13 @@ task :import_nba => [:environment] do |t|
         team2.save
       end
 
-      team1_score = row[3].to_i
-      team2_score = row[5].to_i
+      team1_score = row[3].to_f
+      team2_score = row[5].to_f
       m = Match.new
       m.created_at = DateTime.strptime(row[0], "%a %b %e %Y")
       m.winner = (team1_score > team2_score ? team1 : team2)
       m.loser = (team1_score > team2_score ? team2 : team1)
+      m.score_difference = (m.winner == team1 ? team1_score - team2_score : team2_score - team1_score) ** 0.5
       m.save!
     end
   end
