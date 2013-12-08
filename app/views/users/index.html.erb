@@ -3,6 +3,7 @@
 <table>
   <thead>
   <tr>
+    <th>Ranking</th>
     <th>First name</th>
     <th>Last name</th>
     <th>Rating</th>
@@ -14,8 +15,9 @@
   </thead>
 
   <tbody>
-  <% @users.each do |user| %>
+  <% @users.each_with_index do |user,i| %>
     <tr>
+      <td><%= i+1 %></td>
       <td><%= user.first_name %></td>
       <td><%= user.last_name %></td>
       <td><%= user.elo_mid %></td>
