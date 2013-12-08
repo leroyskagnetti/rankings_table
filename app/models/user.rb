@@ -1,6 +1,18 @@
 class User < ActiveRecord::Base
   validates :name, :presence => true
 
+  def matches
+    Match.where("matches.winner_id = ? or matches.loser_id = ?", self.id, self.id)
+  end
+
+  def wins
+    Match.where(:winner => self).count
+  end
+
+  def losses
+    Match.where(:loser => self).count
+  end
+
   def rating=(new_rating)
     self.sigma = new_rating.sigma
     self.mu = new_rating.mu
