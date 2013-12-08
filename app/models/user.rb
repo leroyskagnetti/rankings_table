@@ -34,7 +34,7 @@ class User < ActiveRecord::Base
   end
 
   def elo_low
-    (60 * self.mu - 60 * 3 * self.sigma).to_i
+    [(60 * self.mu - 60 * 3 * self.sigma).to_i,0].max
   end
 
   def elo_mid
