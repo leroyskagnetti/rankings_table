@@ -6,8 +6,8 @@
 </p>
 
 <p>
-  <strong>Rating:</strong>
-  <%= @user.mu %>
+  <strong>Total Matches: </strong>
+  <%= @user.matches.count %>
 </p>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
