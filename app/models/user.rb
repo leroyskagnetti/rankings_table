@@ -46,7 +46,7 @@ class User < ActiveRecord::Base
   end
 
   def points
-    [(60 * self.mu - 60 * 2 * self.sigma).to_i,0].max
+    [(60 * self.mu - 60 * 3 * self.sigma).to_i,0].max
   end
 
   def self.update_ratings(winner, loser)
