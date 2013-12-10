@@ -2,16 +2,21 @@
 <html>
 <head>
   <title>MilyPong</title>
-  <%= stylesheet_link_tag    "application", media: "all" %>
+  <%= stylesheet_link_tag "application", media: "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-<ul>
-  <li><%= link_to "Home", root_url %></li>
-  <li><%= link_to "Users", users_url %></li>
-  <li><%= link_to "Matches", matches_url %></li>
-</ul>
+<nav class="navbar navbar-default" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+      <li><%= link_to "Home", root_url %></li>
+    </ul>
+  </div>
+  <!-- /.navbar-collapse -->
+</nav>
 <%= yield %>
 
 </body>

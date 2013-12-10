@@ -1,22 +1,22 @@
-<h1>Listing users</h1>
-
-<table>
+<h1>Rankings</h1>
+<%= link_to 'New User', new_user_path, :class => "btn btn-primary" %>
+<%= link_to 'New Match', new_match_path, :class => "btn btn-primary" %>
+<br />
+<table class="table table-condensed table-striped">
   <thead>
   <tr>
-    <th>Ranking | </th>
-    <th>Team | </th>
-    <th>Rating | </th>
-    <th>Range | </th>
+    <th>Rank</th>
+    <th>Team</th>
+    <th>Points</th>
   </tr>
   </thead>
 
   <tbody>
-  <% @users.each_with_index do |user,i| %>
+  <% @users.sort_by(&:points).reverse.each_with_index do |user,i| %>
     <tr>
-      <td><%= i+1 %> | </td>
-      <td><%= link_to user.name, user %> | </td>
-      <td><%= user.elo_low %> | </td>
-      <!--<td><%= user.elo_low %> - <%= user.elo_high %></td>-->
+      <td><%= i+1 %></td>
+      <td><%= link_to user.name, user %></td>
+      <td><%= user.points %></td>
     </tr>
   <% end %>
   </tbody>
@@ -24,4 +24,5 @@
 
 <br>
 
-<%= link_to 'New User', new_user_path %>
+<%= link_to 'New User', new_user_path, :class => "btn btn-primary" %>
+<%= link_to 'New Match', new_match_path, :class => "btn btn-primary" %>

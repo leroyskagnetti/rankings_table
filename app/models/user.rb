@@ -34,7 +34,7 @@ class User < ActiveRecord::Base
   end
 
   def elo_low
-    [(60 * self.mu - 60 * 3 * self.sigma).to_i,0].max
+    (60 * self.mu - 60 * 2 * self.sigma).to_i
   end
 
   def elo_mid
@@ -42,7 +42,11 @@ class User < ActiveRecord::Base
   end
 
   def elo_high
-    (60 *self.mu + 60 *3 * self.sigma).to_i
+    (60 *self.mu + 60 * 2 * self.sigma).to_i
+  end
+
+  def points
+    [(60 * self.mu - 60 * 2 * self.sigma).to_i,0].max
   end
 
   def self.update_ratings(winner, loser)
