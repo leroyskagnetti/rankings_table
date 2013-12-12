@@ -6,8 +6,8 @@
 </p>
 
 <p>
-  <strong>Total Matches: </strong>
-  <%= @user.matches.count %>
+  <strong>Win Percentage: </strong>
+  <%= @user.win_percentage.class == nil ? "No matches" : @user.win_percentage.round(3) %>
 </p>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
