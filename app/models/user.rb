@@ -24,6 +24,14 @@ class User < ActiveRecord::Base
     Match.where(:loser => self).count
   end
 
+  def win_percentage
+    if self.matches.count == 0 
+      nil
+    else
+      self.wins.to_f / self.matches.count.to_f 
+    end
+  end
+
   def rating=(new_rating)
     self.mu = new_rating.mean
     self.sigma = new_rating.deviation
