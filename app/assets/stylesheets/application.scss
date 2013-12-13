@@ -13,3 +13,21 @@
  */
 
 @import 'bootstrap';
+
+img.avatar { 
+	height: 45px;
+	width: 45px;
+	border-radius: 25px;
+}
+
+img.user-profile-img { 
+	height: 75px;
+	width: 75px;
+	border-radius: 38px;
+	margin: 15px;
+}
+
+div.profile-pic-div { 
+	display: inline;
+	margin-right: 10px;
+}
