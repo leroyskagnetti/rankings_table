@@ -2,6 +2,7 @@ MilyPong::Application.routes.draw do
   resources :users, :except => [:destroy]
 
   resources :matches, :only => [:new, :create]
+  resources :doubles_matches, :only => [:new, :create]
 
   root "users#index"
 

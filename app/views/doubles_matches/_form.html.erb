@@ -1,0 +1,34 @@
+<%= form_for(@doubles_match) do |f| %>
+  <% if @doubles_match.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@doubles_match.errors.count, "error") %> prohibited this doubles_match from being saved:</h2>
+
+      <ul>
+      <% @doubles_match.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :winner0_id, "Winner" %><br>
+    <%= f.collection_select :winner0_id, User.order(:name), :id, :name %>
+  </div>
+  <div class="field">
+    <%= f.label :winner1_id, "Winner" %><br>
+    <%= f.collection_select :winner1_id, User.order(:name), :id, :name %>
+  </div>
+  <hr />
+  <div class="field">
+    <%= f.label :loser0_id, "Loser" %><br>
+    <%= f.collection_select :loser0_id, User.order(:name), :id, :name %>
+  </div>
+  <div class="field">
+    <%= f.label :loser1_id, "Loser" %><br>
+    <%= f.collection_select :loser1_id, User.order(:name), :id, :name %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

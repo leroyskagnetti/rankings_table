@@ -11,10 +11,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131214041423) do
+ActiveRecord::Schema.define(version: 20131214054455) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "doubles_matches", force: true do |t|
+    t.integer  "winner0_id"
+    t.integer  "winner1_id"
+    t.integer  "loser0_id"
+    t.integer  "loser1_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.float    "score_difference"
+    t.integer  "winner0_points"
+    t.integer  "winner1_points"
+    t.integer  "loser0_points"
+    t.integer  "loser1_points"
+    t.float    "winner0_sigma"
+    t.float    "winner1_sigma"
+    t.float    "winner0_mu"
+    t.float    "winner1_mu"
+    t.float    "loser0_sigma"
+    t.float    "loser1_sigma"
+    t.float    "loser0_mu"
+    t.float    "loser1_mu"
+  end
 
   create_table "matches", force: true do |t|
     t.integer  "winner_id"
@@ -34,10 +56,13 @@ ActiveRecord::Schema.define(version: 20131214041423) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.float    "mu",         default: 25.0
-    t.float    "sigma",      default: 8.333333333333334
+    t.float    "mu",             default: 25.0
+    t.float    "sigma",          default: 8.333333333333334
     t.string   "email"
-    t.integer  "points",     default: 0
+    t.integer  "points",         default: 0
+    t.float    "doubles_mu",     default: 25.0
+    t.float    "doubles_sigma",  default: 8.333333333333334
+    t.integer  "doubles_points", default: 0
   end
 
 end

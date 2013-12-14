@@ -13,7 +13,7 @@ class Match < ActiveRecord::Base
   end
 
   def update_user_ratings
-      User.update_ratings!(self.winner, self.loser)
+    User.update_ratings!(self.winner, self.loser)
     self.winner_mu = self.winner.mu
     self.winner_sigma = self.winner.sigma
     self.winner_points = self.winner.points

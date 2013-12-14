@@ -1,33 +1,56 @@
 <p id="notice"><%= notice %></p>
 
-<div>
-  <%= image_tag((@user.gravatar_url || "avatar.jpg"), class: "user-profile-img") %>
-  <p>
-    <strong>First name:</strong>
-    <%= @user.name %>
-    <%= @user.gravatar_url %>
-  </p>
+<%= image_tag((@user.gravatar_url || "avatar.jpg"), class: "user-profile-img") %>
+<p>
+  <strong>First name:</strong>
+  <%= @user.name %>
+  <%= @user.gravatar_url %>
+</p>
 
 
-  <p>
-    <strong>Recent Matches</strong>
-  <table style="text-align: center;">
+<p>
+  <strong>Recent Singles Matches</strong>
+<table style="text-align: center;">
+  <tr>
+    <th>Date</th>
+    <th>Opponent</th>
+    <th>Result</th>
+    <th>New Points</th>
+  </tr>
+
+  <% @user.matches.limit(5).order("id desc").each do |match| %>
     <tr>
-      <th>Date</th>
-      <th>Opponent</th>
-      <th>Result</th>
-      <th>New Points</th>
+      <td><%= match.created_at.strftime("%m-%d-%Y") %></td>
+      <td><%= match.winner == @user ? match.loser.name : match.winner.name %></td>
+      <td><%= match.winner == @user ? "win" : "loss" %></td>
+      <td><%= match.winner == @user ? match.winner_points : match.loser_points %></td>
     </tr>
+  <% end %>
+</table>
+</p>
 
-    <% @user.matches.limit(5).order("id desc").each do |match| %>
-      <tr>
-        <td><%= match.created_at.strftime("%m-%d-%Y") %></td>
-        <td><%= match.winner == @user ? match.loser.name : match.winner.name %></td>
-        <td><%= match.winner == @user ? "win" : "loss" %></td>
-        <td><%= match.winner == @user ? match.winner_points : match.loser_points %></td>
-      </tr>
-    <% end %>
-  </table>
-  </p>
-  <%= link_to 'Edit', edit_user_path(@user) %> |
-  <%= link_to 'Back', users_path %>
+<p>
+  <strong>Recent Doubles Matches</strong>
+<table style="text-align: center;">
+  <tr>
+    <th>Date</th>
+    <th>My Team</th>
+    <th>Opponents</th>
+    <th>Result</th>
+    <th>New Points</th>
+  </tr>
+
+  <% @user.doubles_matches.limit(5).order("id desc").each do |match| %>
+    <tr>
+      <td><%= match.created_at.strftime("%m-%d-%Y") %></td>
+      <td><%= (match.winner0 == @user || match.winner1 == @user) ? "#{match.loser0.name} & #{match.loser1.name}" : "#{match.winner0.name} & #{match.winner1.name}" %></td>
+      <td><%= (match.winner0 == @user || match.winner1 == @user) ? "#{match.winner0.name} & #{match.winner1.name}" : "#{match.loser0.name} & #{match.loser1.name}" %></td>
+      <td><%= (match.winner0 == @user || match.winner1 == @user) ? "win" : "loss" %></td>
+      <td><%= doubles_match_points_for_user(match, @user) %></td>
+
+    </tr>
+  <% end %>
+</table>
+</p>
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>
