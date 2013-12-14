@@ -20,6 +20,10 @@ class MatchesController < ApplicationController
     end
   end
 
+  def rerun
+
+  end
+
   private
     # Never trust parameters from the scary internet, only allow the white list through.
     def match_params
