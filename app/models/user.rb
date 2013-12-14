@@ -26,7 +26,7 @@ class User < ActiveRecord::Base
 
   def win_percentage
     if self.matches.count == 0 
-      nil
+      0.0
     else
       self.wins.to_f / self.matches.count.to_f 
     end
@@ -88,10 +88,6 @@ class User < ActiveRecord::Base
   end
 
   def gravatar_url
-    if self.gravatar
-      Gravatar.new(self.gravatar).image_url
-    else
-      nil
-    end
+    self.email && Gravatar.new(self.email).image_url
   end
 end

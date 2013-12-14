@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 20131213155248) do
     t.datetime "updated_at"
     t.float    "mu",         default: 25.0
     t.float    "sigma",      default: 8.333333333333334
-    t.string   "gravatar"
+    t.string   "email"
   end
 
 end

@@ -1,11 +1,11 @@
 <p id="notice"><%= notice %></p>
 
 <div> 
-<%= @user.gravatar ? image_tag(@user.gravatar_url, class: 'user-profile-img') : image_tag('avatar.jpg', class: 'user-profile-img') %>
-
+<%= image_tag((@user.gravatar_url || "avatar.jpg"), class: "user-profile-img") %>
 <p>
   <strong>First name:</strong>
   <%= @user.name %>
+  <%= @user.gravatar_url %>
 </p>
 
 <p>
