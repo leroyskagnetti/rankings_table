@@ -86,4 +86,12 @@ class User < ActiveRecord::Base
     winner.save!
     loser.save!
   end
+
+  def gravatar_url
+    if self.gravatar
+      Gravatar.new(self.gravatar).image_url
+    else
+      nil
+    end
+  end
 end

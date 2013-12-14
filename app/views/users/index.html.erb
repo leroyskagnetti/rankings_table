@@ -15,7 +15,7 @@
   <% @users.sort_by(&:points).reverse.each_with_index do |user,i| %>
     <tr>
       <td><%= i+1 %></td>
-      <td><%= link_to user.name, user %></td>
+      <td><div class="profile-pic-div"><%= user.gravatar.nil? ? image_tag("avatar.jpg", class: "avatar") : image_tag(user.gravatar_url, class: "avatar") %></div><%= link_to user.name, user %></td>
       <td><%= user.points %></td>
     </tr>
   <% end %>

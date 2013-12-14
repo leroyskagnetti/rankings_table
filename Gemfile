@@ -9,6 +9,7 @@ gem 'bootstrap-sass', '~> 3.0.3.0'
 gem 'jquery-rails'
 gem 'jbuilder', '~> 1.2'
 gem 'unicorn'
+gem 'gravatar-ultimate'
 
 gem 'rails_12factor', group: :production
 
