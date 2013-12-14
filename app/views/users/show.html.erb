@@ -3,15 +3,14 @@
 <div>
   <%= image_tag((@user.gravatar_url || "avatar.jpg"), class: "user-profile-img") %>
   <p>
-    <strong>First name:</strong>
+    <strong>Name: </strong>
     <%= @user.name %>
-    <%= @user.gravatar_url %>
   </p>
 
 
   <p>
     <strong>Recent Matches</strong>
-  <table style="text-align: center;">
+  <table class="table table-striped table-condensed" style="text-align: center;">
     <tr>
       <th>Date</th>
       <th>Opponent</th>
