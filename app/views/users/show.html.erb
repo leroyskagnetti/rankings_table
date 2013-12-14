@@ -16,6 +16,7 @@
       <th>Date</th>
       <th>Opponent</th>
       <th>Result</th>
+      <th>New Points</th>
     </tr>
 
     <% @user.matches.limit(5).order("id desc").each do |match| %>
@@ -23,6 +24,7 @@
         <td><%= match.created_at.strftime("%m-%d-%Y") %></td>
         <td><%= match.winner == @user ? match.loser.name : match.winner.name %></td>
         <td><%= match.winner == @user ? "win" : "loss" %></td>
+        <td><%= match.winner == @user ? match.winner_points : match.loser_points %></td>
       </tr>
     <% end %>
   </table>

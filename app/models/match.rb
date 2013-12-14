@@ -13,10 +13,20 @@ class Match < ActiveRecord::Base
   end
 
   def update_user_ratings
-    if self.score_difference.nil?
       User.update_ratings!(self.winner, self.loser)
-    else
-      User.update_ratings_scored!(self.winner, self.loser, self.score_difference)
+    self.winner_mu = self.winner.mu
+    self.winner_sigma = self.winner.sigma
+    self.winner_points = self.winner.points
+    self.loser_mu = self.loser.mu
+    self.loser_sigma = self.loser.sigma
+    self.loser_points = self.loser.points
+    self.save
+  end
+
+  def self.recalculate
+    User.update_all(:mu => 25.0, :sigma => (25.0 / 3.0), :points => 0)
+    Match.order("id asc").each do |match|
+      match.update_user_ratings
     end
   end
 end

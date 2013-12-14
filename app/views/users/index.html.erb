@@ -15,7 +15,7 @@
   </thead>
 
   <tbody>
-  <% @users.sort_by(&:points).reverse.each_with_index do |user, i| %>
+  <% @users.each_with_index do |user, i| %>
     <tr>
       <td><%= i+1 %></td>
       <td>
@@ -23,7 +23,7 @@
       </td>
       <td><%= user.wins %> - <%= user.losses %></td>
       <td><%= (user.win_percentage * 100.0).round(1) %>%</td>
-      <td><%= user.points %></td>
+      <td><strong><%= user.points %></strong></td>
       <td>
         <% user.matches.order("id desc").limit(3).each do |match| %>
           <% if match.winner == user %>

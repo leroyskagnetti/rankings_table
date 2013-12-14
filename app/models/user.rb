@@ -41,22 +41,6 @@ class User < ActiveRecord::Base
     Rating.new(self.mu, self.sigma, 1.0, 25.0 / 300.0)
   end
 
-  def elo_low
-    (60 * self.mu - 60 * 2 * self.sigma).to_i
-  end
-
-  def elo_mid
-    (60 *self.mu).to_i
-  end
-
-  def elo_high
-    (60 *self.mu + 60 * 2 * self.sigma).to_i
-  end
-
-  def points
-    [(60 * self.mu - 60 * 3 * self.sigma).to_i,0].max
-  end
-
   def self.update_ratings(winner, loser)
     team1 = [winner.rating]
     team2 = [loser.rating]
@@ -64,22 +48,24 @@ class User < ActiveRecord::Base
     graph.update_skills
     winner.rating = team1[0]
     loser.rating = team2[0]
+    winner.points += [[(20 * (loser.mu)) - (winner.points), 40].min,3].max
+    loser.points = [loser.points + [[(20 * (loser.mu)) - (loser.points), -40].max, 0].min, 0].max
   end
 
-  def self.update_ratings_scored(winner, loser, difference)
-    team1 = [winner.rating]
-    team2 = [loser.rating]
-    graph = ScoreBasedBayesianRating.new({team1 => difference, team2 => -difference})
-    graph.update_skills
-    winner.rating = team1[0]
-    loser.rating = team2[0]
-  end
-
-  def self.update_ratings_scored!(winner, loser, difference)
-    self.update_ratings_scored(winner, loser, difference)
-    winner.save!
-    loser.save!
-  end
+  #def self.update_ratings_scored(winner, loser, difference)
+  #  team1 = [winner.rating]
+  #  team2 = [loser.rating]
+  #  graph = ScoreBasedBayesianRating.new({team1 => difference, team2 => -difference})
+  #  graph.update_skills
+  #  winner.rating = team1[0]
+  #  loser.rating = team2[0]
+  #end
+  #
+  #def self.update_ratings_scored!(winner, loser, difference)
+  #  self.update_ratings_scored(winner, loser, difference)
+  #  winner.save!
+  #  loser.save!
+  #end
 
   def self.update_ratings!(winner, loser)
     self.update_ratings(winner, loser)

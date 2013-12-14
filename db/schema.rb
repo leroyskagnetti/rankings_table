@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131213155248) do
+ActiveRecord::Schema.define(version: 20131214041423) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,12 @@ ActiveRecord::Schema.define(version: 20131213155248) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.float    "score_difference"
+    t.integer  "winner_points"
+    t.integer  "loser_points"
+    t.float    "winner_sigma"
+    t.float    "winner_mu"
+    t.float    "loser_sigma"
+    t.float    "loser_mu"
   end
 
   create_table "users", force: true do |t|
@@ -31,6 +37,7 @@ ActiveRecord::Schema.define(version: 20131213155248) do
     t.float    "mu",         default: 25.0
     t.float    "sigma",      default: 8.333333333333334
     t.string   "email"
+    t.integer  "points",     default: 0
   end
 
 end
