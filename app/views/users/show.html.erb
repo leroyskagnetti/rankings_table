@@ -1,17 +1,35 @@
 <p id="notice"><%= notice %></p>
 
-<div> 
-<%= image_tag((@user.gravatar_url || "avatar.jpg"), class: "user-profile-img") %>
-<p>
-  <strong>First name:</strong>
-  <%= @user.name %>
-  <%= @user.gravatar_url %>
-</p>
+<div>
+  <%= image_tag((@user.gravatar_url || "avatar.jpg"), class: "user-profile-img") %>
+  <p>
+    <strong>First name:</strong>
+    <%= @user.name %>
+    <%= @user.gravatar_url %>
+  </p>
 
-<p>
-  <strong>Win Percentage: </strong>
-  <%= @user.win_percentage.class == nil ? "No matches" : @user.win_percentage.round(3) %>
-</p>
+  <p>
+    <strong>Win Percentage: </strong>
+    <%= @user.win_percentage.class == nil ? "No matches" : @user.win_percentage.round(3) %>
+  </p>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+  <p>
+    <strong>Matches</strong>
+  <table style="text-align: center;">
+    <tr>
+      <th>Date</th>
+      <th>Opponent</th>
+      <th>Result</th>
+    </tr>
+
+    <% @user.matches.order("id desc").each do |match| %>
+      <tr>
+        <td><%= match.created_at.strftime("%m-%d-%Y") %></td>
+        <td><%= match.winner == @user ? match.loser.name : match.winner.name %></td>
+        <td><%= match.winner == @user ? "win" : "loss" %></td>
+      </tr>
+    <% end %>
+  </table>
+  </p>
+  <%= link_to 'Edit', edit_user_path(@user) %> |
+  <%= link_to 'Back', users_path %>

@@ -1,22 +1,39 @@
 <h1>Rankings</h1>
 <%= link_to 'New User', new_user_path, :class => "btn btn-primary" %>
 <%= link_to 'New Match', new_match_path, :class => "btn btn-primary" %>
-<br />
+<br/>
 <table class="table table-condensed table-striped">
   <thead>
   <tr>
     <th>Rank</th>
     <th>Team</th>
+    <th>Record(W-L)</th>
+    <th>Win Percentage</th>
     <th>Points</th>
+    <th>Recent History</th>
   </tr>
   </thead>
 
   <tbody>
-  <% @users.sort_by(&:points).reverse.each_with_index do |user,i| %>
+  <% @users.sort_by(&:points).reverse.each_with_index do |user, i| %>
     <tr>
       <td><%= i+1 %></td>
-      <td><div class="profile-pic-div"><%=  image_tag((user.gravatar_url || "avatar.jpg"), class: "avatar") %></div><%= link_to user.name, user %></td>
+      <td>
+        <div class="profile-pic-div"><%= image_tag((user.gravatar_url || "avatar.jpg"), class: "avatar") %></div><%= link_to user.name, user %>
+      </td>
+      <td><%= user.wins %> - <%= user.losses %></td>
+      <td><%= (user.win_percentage * 100.0).round(1) %>%</td>
       <td><%= user.points %></td>
+      <td>
+        <% user.matches.order("id desc").limit(3).each do |match| %>
+          <% if match.winner == user %>
+            Won against <%= link_to match.loser.name, match.loser %>
+            <br/>
+          <% else %>
+            Lost to <%= link_to match.winner.name, match.winner %><br />
+          <% end %>
+        <% end %>
+      </td>
     </tr>
   <% end %>
   </tbody>
