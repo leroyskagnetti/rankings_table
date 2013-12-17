@@ -8,7 +8,6 @@
   <tr>
     <th>Rank</th>
     <th>Team</th>
-    <th>Record(W-L)</th>
     <th>Win Percentage</th>
     <th>Points</th>
     <th>Recent History</th>
@@ -22,7 +21,6 @@
       <td>
         <div class="profile-pic-div"><%= image_tag((user.gravatar_url || "avatar.jpg"), class: "avatar") %></div><%= link_to user.name, user %>
       </td>
-      <td><%= user.wins %> - <%= user.losses %></td>
       <td><%= (user.win_percentage * 100.0).round(1) %>%</td>
       <td><strong><%= user.points %></strong></td>
       <td>
@@ -52,7 +50,6 @@
   <tr>
     <th>Rank</th>
     <th>Team</th>
-    <th>Record(W-L)</th>
     <th>Win Percentage</th>
     <th>Points</th>
     <th>Recent History</th>
@@ -66,7 +63,6 @@
       <td>
         <div class="profile-pic-div"><%= image_tag((user.gravatar_url || "avatar.jpg"), class: "avatar") %></div><%= link_to user.name, user %>
       </td>
-      <td><%= user.doubles_wins %> - <%= user.doubles_losses %></td>
       <td><%= (user.doubles_win_percentage * 100.0).round(1) %>%</td>
       <td><strong><%= user.doubles_points %></strong></td>
       <td>
