@@ -34,8 +34,8 @@ class DoublesMatch < ActiveRecord::Base
   end
 
   def self.recalculate
-    User.update_all(:mu => 25.0, :sigma => (25.0 / 3.0), :points => 0)
-    Match.order("id asc").each do |match|
+    User.update_all(:doubles_mu => 25.0, :doubles_sigma => (25.0 / 3.0), :doubles_points => 0)
+    DoublesMatch.order("id asc").each do |match|
       match.update_user_ratings
     end
   end
