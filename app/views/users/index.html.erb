@@ -14,7 +14,7 @@
   </thead>
 
   <tbody>
-  <% @users.sort_by{|user| [-user.points, -user.win_percentage]}.each_with_index do |user, i| %>
+  <% @users.sort_by{|user| -user.elo}.each_with_index do |user, i| %>
     <tr>
       <td><%= i+1 %></td>
       <td>
