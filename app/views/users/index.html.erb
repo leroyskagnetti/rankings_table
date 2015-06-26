@@ -1,6 +1,5 @@
 <%= link_to 'New User', new_user_path, :class => "btn btn-primary" %>
 <%= link_to 'New Match', new_match_path, :class => "btn btn-primary" %>
-<%= link_to 'New Doubles Match', new_doubles_match_path, :class => "btn btn-primary" %>
 <br/>
 <h1>Singles Rankings</h1>
 <table class="table table-condensed table-striped">
@@ -9,7 +8,7 @@
     <th>Rank</th>
     <th>Team</th>
     <th>Win Percentage</th>
-    <th>Points</th>
+    <th>Elo</th>
     <th>Recent History</th>
   </tr>
   </thead>
@@ -22,7 +21,7 @@
         <div class="profile-pic-div"><%= image_tag((user.gravatar_url || "avatar.jpg"), class: "avatar") %></div><%= link_to user.name, user %>
       </td>
       <td><%= (user.win_percentage * 100.0).round(1) %>%</td>
-      <td><strong><%= user.points %></strong></td>
+      <td><strong><%= user.elo %></strong></td>
       <td>
         <% user.matches.order("id desc").limit(3).each do |match| %>
           <% if match.winner == user %>
@@ -42,41 +41,3 @@
 <hr/>
 <%= link_to 'New User', new_user_path, :class => "btn btn-primary" %>
 <%= link_to 'New Match', new_match_path, :class => "btn btn-primary" %>
-<%= link_to 'New Doubles Match', new_doubles_match_path, :class => "btn btn-primary" %>
-<br />
-<h1>Doubles Rankings</h1>
-<table class="table table-condensed table-striped">
-  <thead>
-  <tr>
-    <th>Rank</th>
-    <th>Team</th>
-    <th>Win Percentage</th>
-    <th>Points</th>
-    <th>Recent History</th>
-  </tr>
-  </thead>
-
-  <tbody>
-  <% @users.sort_by{|user| [-user.doubles_points, -user.win_percentage]}.each_with_index do |user, i| %>
-    <tr>
-      <td><%= i+1 %></td>
-      <td>
-        <div class="profile-pic-div"><%= image_tag((user.gravatar_url || "avatar.jpg"), class: "avatar") %></div><%= link_to user.name, user %>
-      </td>
-      <td><%= (user.doubles_win_percentage * 100.0).round(1) %>%</td>
-      <td><strong><%= user.doubles_points %></strong></td>
-      <td>
-        <% user.doubles_matches.order("id desc").limit(3).each do |match| %>
-          <%= "#{link_to match.winner0.name, match.winner0} & #{link_to match.winner1.name, match.winner1} beat #{link_to match.loser0.name, match.loser0} & #{link_to match.loser1.name, match.loser1}".html_safe %>
-          <br/>
-        <% end %>
-      </td>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
-
-
-<%= link_to 'New User', new_user_path, :class => "btn btn-primary" %>
-<%= link_to 'New Match', new_match_path, :class => "btn btn-primary" %>
-<%= link_to 'New Doubles Match', new_doubles_match_path, :class => "btn btn-primary" %>

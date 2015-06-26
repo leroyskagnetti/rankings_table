@@ -61,6 +61,14 @@ class User < ActiveRecord::Base
     Rating.new(self.mu, self.sigma, 1.0, 25.0 / 300.0)
   end
 
+  def trueskill
+    (self.mu - 2.0 * self.sigma).round(2)
+  end
+
+  def elo
+    ((self.mu) * 48.0).to_i
+  end
+
   def doubles_rating=(new_rating)
     self.doubles_mu = new_rating.mean
     self.doubles_sigma = new_rating.deviation
