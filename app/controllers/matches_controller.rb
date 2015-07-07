@@ -11,6 +11,7 @@ class MatchesController < ApplicationController
 
     respond_to do |format|
       if @match.save
+        Slack::Post.post "EA Pong: #{@match.winner.name} wins against #{@match.loser.name}", '#general'
         format.html { redirect_to root_path, notice: 'Match was successfully created.' }
         format.json { render action: 'show', status: :created, location: @match }
       else
