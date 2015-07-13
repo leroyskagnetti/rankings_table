@@ -69,13 +69,19 @@ class User < ActiveRecord::Base
     ((self.mu) * 48.0).to_i
   end
 
+  def self.odds(user1, user2)
+    mu = user1.mu - user2.mu
+    sigma = (user1.sigma ** 2.0 + user2.sigma ** 2.0) ** 0.5
+    Rating.cumulative_distribution_function(mu/sigma)
+  end
+
   def doubles_rating=(new_rating)
     self.doubles_mu = new_rating.mean
     self.doubles_sigma = new_rating.deviation
   end
 
   def doubles_rating
-    Rating.new(self.doubles_mu, self.doubles_sigma, 1.0, 25.0 / 300.0)
+    Rating.new(self.doubles_mu, self.doubles_sigma)
   end
 
   def self.update_ratings(winner, loser)
